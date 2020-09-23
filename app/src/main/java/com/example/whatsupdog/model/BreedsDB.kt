@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 
 private const val DATA_BASE_NAME="breeds_db"
 
-@Database(entities = [DataBreedList::class],version = 1)
+@Database(entities = [DataBreedDBList::class],version = 1)
 
 abstract class BreedsDB : RoomDatabase() {
 

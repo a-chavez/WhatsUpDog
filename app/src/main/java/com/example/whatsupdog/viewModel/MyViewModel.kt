@@ -1,29 +1,25 @@
 package com.example.whatsupdog.viewModel
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.whatsupdog.model.BreedsDB
+import com.example.whatsupdog.model.DataBreedDBList
 import com.example.whatsupdog.model.Repository
+import kotlinx.coroutines.launch
 
-class MyViewModel: ViewModel(){
+class MyViewModel (application: Application): AndroidViewModel(application){
 
-    private val mBreedsRepository = Repository()
-    private val mImageRepository = Repository()
+    private val mBreedsRepository : Repository
+    val mAllBreeds : LiveData<List<DataBreedDBList>>
 
 
     init {
-        mBreedsRepository.getBreedsFromServer()
-        mImageRepository.getImageBreedsFromServer(mRazas = "Boxer")
-    }
-
-    fun exposeLiveDataBreedList() : MutableLiveData<List<String>> {
-
-        return mBreedsRepository.mLiveDataBreedList
-
-    }
-
-    fun exposeLiveDataImageBreedList() : LiveData<List<String>>{
-        return mImageRepository.mLiveDataImageBreedList
+        val mBreedsDAO = BreedsDB.getDataBase(application).getBreedsDAO()
+        mBreedsRepository = Repository(mBreedsDAO)
+        mAllBreeds = mBreedsRepository.mLiveDataBreedList
     }
 
 }

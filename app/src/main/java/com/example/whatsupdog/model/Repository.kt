@@ -2,14 +2,20 @@ package com.example.whatsupdog.model
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class Repository {
+class Repository (private val mBreedsDAO: BreedsDAO){
     private val service = RetroFitClient.getRetrofitClient()
-    val mLiveDataBreedList : MutableLiveData<List<String>> = MutableLiveData()
+
+    //val mLiveDataBreedList : MutableLiveData<List<String>> = MutableLiveData()
+    val mLiveDataBreedList = mBreedsDAO.getAllBreedsFromDB()
     val mLiveDataImageBreedList : MutableLiveData<List<String>> = MutableLiveData()
+
 
    //LaVieja1
     fun getBreedsFromServer() {
@@ -17,7 +23,12 @@ class Repository {
         mCall.enqueue(object : Callback<DataBreedList>{
             override fun onResponse(call: Call<DataBreedList>, response: Response<DataBreedList>) {
                 when(response.code()){
-                    in 200..299 -> mLiveDataBreedList.postValue(response.body()?.message)
+                   //in 200..299 -> mLiveDataBreedList.postValue(response.body()?.message)
+                    in 200..299 -> CoroutineScope(Dispatchers.IO).launch {
+                       response.body()?.let {
+                           mBreedsDAO.insertAllBreeds(transformation(it.message))
+                       }
+                    }
                     in 300..399 -> Log.d("ERROR 300 Breeds", response.errorBody().toString())
                 }
             }
@@ -46,6 +57,14 @@ class Repository {
             }
 
         })
+    }
+
+    fun transformation(mStringList:List<String>):List<DataBreedDBList>{
+        val mDataBreedsDBList: MutableList<DataBreedDBList> = emptyList<DataBreedDBList>() as MutableList<DataBreedDBList>
+        mStringList.map{
+            mDataBreedsDBList.add(DataBreedDBList(it))
+        }
+        return mDataBreedsDBList
     }
 
 }

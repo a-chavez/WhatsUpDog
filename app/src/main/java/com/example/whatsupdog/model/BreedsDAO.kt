@@ -9,9 +9,9 @@ import androidx.room.Query
 @Dao
 interface BreedsDAO {
     @Insert (onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAllBreeds(mBreedList: List<String>) //puede ser DataBreedsList ?
+    suspend fun insertAllBreeds(mBreedList: List<DataBreedDBList>)
 
-    @Query("SELECT * FROM breeds_table")
-    fun getAllBreedsFromDB(): LiveData<List<String>>
+    @Query("SELECT * FROM breed_table")
+    fun getAllBreedsFromDB(): LiveData<List<DataBreedDBList>>
 
 }
