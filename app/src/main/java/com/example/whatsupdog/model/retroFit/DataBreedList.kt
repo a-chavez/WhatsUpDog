@@ -1,4 +1,4 @@
-package com.example.whatsupdog.model
+package com.example.whatsupdog.model.retroFit
 
 
 import com.google.gson.annotations.SerializedName

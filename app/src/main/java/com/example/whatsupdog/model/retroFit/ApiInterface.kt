@@ -1,8 +1,7 @@
-package com.example.whatsupdog.model
+package com.example.whatsupdog.model.retroFit
 
 import retrofit2.http.GET
 import retrofit2.Call
-import retrofit2.Response
 import retrofit2.http.Path
 
 interface ApiInterface {
@@ -10,9 +9,6 @@ interface ApiInterface {
     @GET("breeds/list")
     fun getBreedsFromApi() : Call<DataBreedList>
 
-
     @GET("breeds/{razas}/images")
-    fun getImagesFromApi(@Path("razas") mRazas:String): Call<DataImageBreedList>
-
-
+    fun getImagesFromApi(@Path("razas") mRazas:String): Call<DataImageList>
 }

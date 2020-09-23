@@ -1,9 +1,9 @@
-package com.example.whatsupdog.model
+package com.example.whatsupdog.model.retroFit
 
 
 import com.google.gson.annotations.SerializedName
 
-data class DataImageBreedList(
+data class DataImageList(
     @SerializedName("message")
     val message: List<String>,
     @SerializedName("status")

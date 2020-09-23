@@ -2,6 +2,11 @@ package com.example.whatsupdog.model
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import com.example.whatsupdog.model.retroFit.DataBreedList
+import com.example.whatsupdog.model.retroFit.DataImageList
+import com.example.whatsupdog.model.retroFit.RetroFitClient
+import com.example.whatsupdog.model.room.BreedsDAO
+import com.example.whatsupdog.model.room.DataBreedDBList
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -42,8 +47,8 @@ class Repository (private val mBreedsDAO: BreedsDAO){
     //LaVieja2
     fun getImageBreedsFromServer(mRazas:String) {
         val mCall = service.getImagesFromApi(mRazas)
-        mCall.enqueue(object : Callback<DataImageBreedList>{
-            override fun onResponse(call: Call<DataImageBreedList>, response: Response<DataImageBreedList>) {
+        mCall.enqueue(object : Callback<DataImageList>{
+            override fun onResponse(call: Call<DataImageList>, response: Response<DataImageList>) {
                 when(response.code()){
                     in 200..299 -> mLiveDataImageBreedList.postValue(response.body()?.message)
                     in 300..399 -> Log.d("ERROR 300 Images", response.errorBody().toString())
@@ -51,7 +56,7 @@ class Repository (private val mBreedsDAO: BreedsDAO){
 
             }
 
-            override fun onFailure(call: Call<DataImageBreedList>, t: Throwable) {
+            override fun onFailure(call: Call<DataImageList>, t: Throwable) {
                 Log.e("Repository Images", t.message.toString())
             }
 

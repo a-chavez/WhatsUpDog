@@ -3,9 +3,9 @@ package com.example.whatsupdog.model
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.view.menu.ActionMenuItemView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.whatsupdog.R
+import com.example.whatsupdog.model.room.DataBreedDBList
 import kotlinx.android.synthetic.main.breeds.view.*
 
 class BreedsAdapter(var mPassBreeds: Breeds) :RecyclerView.Adapter<BreedsAdapter.TaskViewHolder>() {

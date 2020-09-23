@@ -1,4 +1,4 @@
-package com.example.whatsupdog.model
+package com.example.whatsupdog.model.room
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao

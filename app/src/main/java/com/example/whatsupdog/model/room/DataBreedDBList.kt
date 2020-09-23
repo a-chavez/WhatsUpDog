@@ -1,4 +1,4 @@
-package com.example.whatsupdog.model
+package com.example.whatsupdog.model.room
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

@@ -1,4 +1,4 @@
-package com.example.whatsupdog.model
+package com.example.whatsupdog.model.retroFit
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

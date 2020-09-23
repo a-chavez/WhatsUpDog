@@ -1,4 +1,4 @@
-package com.example.whatsupdog.model
+package com.example.whatsupdog.model.room
 
 import android.content.Context
 import androidx.room.Database
@@ -17,7 +17,7 @@ abstract class BreedsDB : RoomDatabase() {
         @Volatile
         private var INSTANCE: BreedsDB? = null
 
-        fun getDataBase(context: Context):BreedsDB {
+        fun getDataBase(context: Context): BreedsDB {
             //Para que no repita la instancia
             val tempInterface = INSTANCE
             if(tempInterface !=null) {
@@ -26,7 +26,8 @@ abstract class BreedsDB : RoomDatabase() {
             synchronized(this) {
                 val instance = Room.databaseBuilder(context,
                     BreedsDB::class.java,
-                    DATA_BASE_NAME)
+                    DATA_BASE_NAME
+                )
                     .build()
                 INSTANCE = instance
                 return instance
