@@ -39,7 +39,7 @@ class Home : Fragment(), BreedsAdapter.Breeds {
         mRecyclerView.adapter       = mAdapter
         mRecyclerView.layoutManager = LinearLayoutManager(context)
 
-        mViewModel.exposeLiveDataBreedList().observe(viewLifecycleOwner, Observer {
+        mViewModel.mAllBreeds.observe(viewLifecycleOwner, Observer {
           mAdapter.updateListBreeds(it)
 
         })

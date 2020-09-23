@@ -12,10 +12,9 @@ import retrofit2.Response
 class Repository (private val mBreedsDAO: BreedsDAO){
     private val service = RetroFitClient.getRetrofitClient()
 
-    //val mLiveDataBreedList : MutableLiveData<List<String>> = MutableLiveData()
     val mLiveDataBreedList = mBreedsDAO.getAllBreedsFromDB()
     val mLiveDataImageBreedList : MutableLiveData<List<String>> = MutableLiveData()
-
+    val mDataBreedsDBList =  mutableListOf<DataBreedDBList>()
 
    //LaVieja1
     fun getBreedsFromServer() {
@@ -23,7 +22,7 @@ class Repository (private val mBreedsDAO: BreedsDAO){
         mCall.enqueue(object : Callback<DataBreedList>{
             override fun onResponse(call: Call<DataBreedList>, response: Response<DataBreedList>) {
                 when(response.code()){
-                   //in 200..299 -> mLiveDataBreedList.postValue(response.body()?.message)
+
                     in 200..299 -> CoroutineScope(Dispatchers.IO).launch {
                        response.body()?.let {
                            mBreedsDAO.insertAllBreeds(transformation(it.message))
@@ -60,7 +59,7 @@ class Repository (private val mBreedsDAO: BreedsDAO){
     }
 
     fun transformation(mStringList:List<String>):List<DataBreedDBList>{
-        val mDataBreedsDBList: MutableList<DataBreedDBList> = emptyList<DataBreedDBList>() as MutableList<DataBreedDBList>
+
         mStringList.map{
             mDataBreedsDBList.add(DataBreedDBList(it))
         }

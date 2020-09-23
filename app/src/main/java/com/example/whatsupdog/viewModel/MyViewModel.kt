@@ -20,6 +20,8 @@ class MyViewModel (application: Application): AndroidViewModel(application){
         val mBreedsDAO = BreedsDB.getDataBase(application).getBreedsDAO()
         mBreedsRepository = Repository(mBreedsDAO)
         mAllBreeds = mBreedsRepository.mLiveDataBreedList
+        mBreedsRepository.getBreedsFromServer()
     }
+
 
 }

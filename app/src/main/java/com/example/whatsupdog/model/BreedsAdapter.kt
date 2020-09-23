@@ -10,9 +10,9 @@ import kotlinx.android.synthetic.main.breeds.view.*
 
 class BreedsAdapter(var mPassBreeds: Breeds) :RecyclerView.Adapter<BreedsAdapter.TaskViewHolder>() {
 
-    private var dataList = emptyList<String>()
+    private var dataList = emptyList<DataBreedDBList>()
 
-    fun updateListBreeds (mDataList: List<String>){
+    fun updateListBreeds (mDataList: List<DataBreedDBList>){
         dataList = mDataList
         notifyDataSetChanged()
     }
@@ -22,7 +22,7 @@ class BreedsAdapter(var mPassBreeds: Breeds) :RecyclerView.Adapter<BreedsAdapter
         val itemView = itemView.setOnClickListener(this)
 
         override fun onClick(p0: View?) {
-           mPassBreeds.passBreeds(dataList[adapterPosition])
+           mPassBreeds.passBreeds(dataList[adapterPosition].mBreed)
         }
 
     }
@@ -34,7 +34,7 @@ class BreedsAdapter(var mPassBreeds: Breeds) :RecyclerView.Adapter<BreedsAdapter
 
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
         val mBreeds = dataList[position]
-        holder.breedsName.text = mBreeds
+        holder.breedsName.text = mBreeds.mBreed
 
     }
 
