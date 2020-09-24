@@ -6,9 +6,9 @@ import retrofit2.http.Path
 
 interface ApiInterface {
 
-    @GET("breeds/list")
+    @GET("breeds/list") //endPoint
     fun getBreedsFromApi() : Call<DataBreedList>
 
-    @GET("breeds/{razas}/images")
+    @GET("breeds/{razas}/images") //endPoint
     fun getImagesFromApi(@Path("razas") mRazas:String): Call<DataImageList>
 }
