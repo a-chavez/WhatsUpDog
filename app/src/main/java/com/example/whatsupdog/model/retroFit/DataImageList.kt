@@ -9,3 +9,4 @@ data class DataImageList(
     @SerializedName("status")
     val status: String
 )
+

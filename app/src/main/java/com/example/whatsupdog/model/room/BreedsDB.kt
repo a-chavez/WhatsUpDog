@@ -7,11 +7,12 @@ import androidx.room.RoomDatabase
 
 private const val DATA_BASE_NAME="breeds_db"
 
-@Database(entities = [DataBreedDBList::class],version = 1)
+@Database(entities = [DataBreedDBList::class,DataImagesDBList::class],version = 1)
 
 abstract class BreedsDB : RoomDatabase() {
 
     abstract fun getBreedsDAO(): BreedsDAO
+    abstract fun getImagesDAO(): ImagesDAO
 
     companion object {
         @Volatile
