@@ -24,13 +24,12 @@ class MyViewModel (application: Application): AndroidViewModel(application){
         mAllBreeds = mBreedsRepository.mLiveDataBreedList
         mAllImages = mBreedsRepository.mLiveDataImageBreedList
         mBreedsRepository.getBreedsFromServer()
-     //   mBreedsRepository.getImageBreedsFromServer("akita")
-    }
+        }
 
-   /*
+
     fun getImages(mRaza : String) {
         mBreedsRepository.getImageBreedsFromServer(mRaza)
-        Log.d(" Arroz fragment viewModel =","Paso por getImages")
+        Log.d("Arroz fragment viewModel =","Paso por getImages")
     }
-*/
+
 }

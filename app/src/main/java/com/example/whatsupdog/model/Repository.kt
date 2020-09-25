@@ -42,7 +42,7 @@ class Repository (private val mBreedsDAO: BreedsDAO, private val mImagesDAO: Ima
             }
 
             override fun onFailure(call: Call<DataBreedList>, t: Throwable) {
-                Log.e("Error en Breeds API", t.message.toString())
+
             }
 
         })
@@ -50,7 +50,6 @@ class Repository (private val mBreedsDAO: BreedsDAO, private val mImagesDAO: Ima
 
     //LaVieja2
     fun getImageBreedsFromServer(mRazas:String) {
-
         val mCall = service.getImagesFromApi(mRazas)
         mCall.enqueue(object : Callback<DataImageList>{
             override fun onResponse(call: Call<DataImageList>, response: Response<DataImageList>) {
@@ -58,8 +57,7 @@ class Repository (private val mBreedsDAO: BreedsDAO, private val mImagesDAO: Ima
                     in 200..299 -> CoroutineScope(Dispatchers.IO).launch {
                         response.body()?.let {
                            mImagesDAO.insertAllImages(transformationImages(mRazas,it.message))
-                            Log.d(" Arroz Repo =","entro a la vieja2 correcto")
-                            Log.d(" Arroz Repo =",transformationImages(mRazas,it.message).toString())
+                            Log.d("Arroz Repository =","Entro a la vieja 2 con $mRazas")
                         }
 
                     }

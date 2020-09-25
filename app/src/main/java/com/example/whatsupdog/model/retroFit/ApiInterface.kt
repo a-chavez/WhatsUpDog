@@ -9,6 +9,6 @@ interface ApiInterface {
     @GET("breeds/list") //endPoint
     fun getBreedsFromApi() : Call<DataBreedList>
 
-    @GET("breeds/{razas}/images") //endPoint
+    @GET("breed/{razas}/images") //endPoint
     fun getImagesFromApi(@Path("razas") mRazas:String): Call<DataImageList>
 }
